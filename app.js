@@ -12,7 +12,7 @@ const ordersRouter = require('./routes/orders');
 const paymentsRouter = require('./routes/payments');
 const refreshTokensRouter = require('./routes/refreshTokens');
 
-const verifyToken = require('./middlewares/verifyToken')
+const verifyToken = require('./middlewares/verifyToken');
 
 const app = express();
 
