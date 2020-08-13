@@ -1,16 +1,21 @@
 const apiAdapter = require('../../apiAdapter');
 
 const {
-    URL_SERVICE_MEDIA
+    URL_SERVICE_COURSE
 } = process.env;
 
-const api = apiAdapter(URL_SERVICE_MEDIA);
+const api = apiAdapter(URL_SERVICE_COURSE);
 
 module.exports = async (req, res) => {
     try {
-        const media = await api.get('/media');
-        return res.json(media.data);
+        const chapter = await api.get(`/api/chapters`,{
+            params:{
+                ...req.query
+            }
+        });
+        return res.json(chapter.data);
     } catch (error) {
+
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({ status: 'error', message: 'service unavailable' })
         }
