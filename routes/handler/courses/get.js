@@ -1,13 +1,24 @@
-const create = require('./create');
-const update = require('./update');
-const destroy = require('./destroy');
-const get = require('./get');
-const getAll = require('./getAll');
+const apiAdapter = require('../../apiAdapter');
 
-module.exports = {
-    create,
-    update,
-    destroy,
-    get,
-    getAll
+const {
+    URL_SERVICE_COURSE
+} = process.env;
+
+const api = apiAdapter(URL_SERVICE_COURSE);
+
+module.exports = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const course = await api.get(`/api/courses/${id}`);
+        return res.json(course.data);
+    } catch (error) {
+
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(500).json({ status: 'error', message: 'service unavailable' })
+        }
+
+        const { status, data } = error.response;
+        return res.status(status).json(data);
+    }
+
 }
