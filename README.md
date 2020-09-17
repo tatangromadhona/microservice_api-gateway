@@ -17,6 +17,8 @@ Rather than provide a one-size-fits-all style API, the API gateway can expose a 
 
 The API gateway might also implement security, e.g. verify that the client is authorized to perform the request
 
+This Api-Gateway is built using ExpressJS Framework.
+
 ## Another Services
 
 | User Service | Media Service | Course Service | Payment Service |
